@@ -1,0 +1,20 @@
+Food,Measure,Grams,Calories,Protein,Fat,Sat.Fat,Fiber,Carbs,Category
+Cows' milk,1 qt.,976,660,32,40,36,0,48,Dairy products
+Cheese,1 cup,225,240,30,11,10,0,6,Dairy products
+Eggs Scrambled or fried,2,128,220,13,16,14,0,1,Dairy products
+Mayonnaise,1 T.,15,110,0,12,5,0,0,"Fats, Oils, Shortenings"
+Salt pork,2 oz.,60,470,3,55,,0,0,"Meat, Poultry"
+Hamburger,3 oz.,85,245,21,17,15,0,0,"Meat, Poultry"
+Steak,3 oz.,85,330,20,27,25,0,0,"Meat, Poultry"
+Roasted chicken,3 1/2 oz.,100,290,25,20,16,0,0,"Meat, Poultry"
+Pork sausage,3 1/2 oz.,100,475,18,44,40,0,0,"Meat, Poultry"
+Sardines,3 oz.,85,180,22,9,4,0,0,"Fish, Seafood"
+Oysters,6-8 med.,230,231,232,233,234,235,236,"Fish, Seafood"
+Red kidney,1 cup,260,230,15,1,0,2.5,42,Vegetables A-E
+Beetroots,1 cup,165,1,12,0,,0,0.80,Vegetables A-E
+Lentils,1 cup,200,212,15,0.4,0,2.4,38,Vegetables F-P
+Soybeans,1 cup,200,260,22,11,0,3.2,20,Vegetables R-Z
+Avocado,1/2 large,108,185,2,18,12,1.80,6,Fruits A-F
+Whole-wheat,1-lb. loaf,454,"100",48,14,10,67.50,216,"Breads, cereals, fastfood,grains"
+Bean soups,1 cup,250,190,8,5,4,0.60,30,Soups
+Almonds,1/2 cup,70,425,13,38,28,1.8,13,Seeds and Nuts

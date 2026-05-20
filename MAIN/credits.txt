@@ -1,0 +1,11 @@
+Database 1
+Name: 2024 Compendium of Physical Activities, Published January 2024 in the Journal of Sport and Health Science
+Link: https://pacompendium.com/adult-compendium/
+Usage: Was used to collect data for METs of different workouts to make file: mets.csv
+
+Database 2
+Name: Food Nutrition Analysis+EDA , Published on Kaggle
+Link: https://www.kaggle.com/code/niharika41298/food-nutrition-analysis-eda/input
+Usage: Was used to collect data on the micros in different food to make food.scv, gain.csv and lose.csv
+
+Text Art source: https://patorjk.com/software/taag/#p=display&f=Jacky&t=FITTalis&x=rainbow1&v=4&h=4&w=80&we=false

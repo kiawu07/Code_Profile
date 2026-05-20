@@ -1,0 +1,40 @@
+
+
+
+ ______ _____ _______ _______    _ _     
+ |  ____|_   _|__   __|__   __|  | (_)    
+ | |__    | |    | |     | | __ _| |_ ___ 
+ |  __|   | |    | |     | |/ _` | | / __|
+ | |     _| |_   | |     | | ()_| | | \__ \
+ |_|    |_____|  |_|     |_|\__,_|_|_|___/
+    
+
+Name: Prince Alwalid Kiawu
+Age: 19 years
+Height: 1.75 meters
+Weight: 76 kilograms
+Weight Goal: 77 kilograms
+BMI: 24.8163
+
+======Exercises completed so far=====
+
+ ==========Day 1 ================
+
+fencing for: 56 minutes
+soccer for: 46 minutes
+walking for: 45 minutes
+Calories Burnt Today: 906.000000
+
+ ==========Day 2 ================
+
+yoga for: 10 minutes
+walking for: 20 minutes
+sleeping for: 20 minutes
+Calories Burnt Today: 157.000000
+
+ ==========Day 3 ================
+
+soccer for: 43 minutes
+wrestling for: 46 minutes
+fencing for: 46 minutes
+Calories Burnt Today: 963.000000
