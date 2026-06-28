@@ -1,0 +1,28 @@
+This project is a bank app system simulator(for investing)
+Broad ideas is should:
+    Open an account for a client
+    Enable deposits and withdrawals
+    Investment simulator
+
+    Add ons:
+    Have a seperate online shopping part
+    Have a part to pay for online services
+
+
+Open an Account for client:
+    Inputs personal info
+    Generates an account number
+    User input password
+
+Enable deposits and withdrawals:
+    Checks deposit credentials
+    Check withdrawal credentials
+    Make proper adjustments to account
+    Withdrawal based on account type chosen
+
+
+Investment simulator
+    User choose investment account type
+    User choose stock to invest in
+    Simulate stock growth or loss
+
