@@ -2,11 +2,11 @@
 Alwalid Kiawu, July 2, 2026, 5:10 PM
 */
 
-#include <iostream>
-#include <string>
-
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
+
+
+using namespace std;
 
 
 class Client{
