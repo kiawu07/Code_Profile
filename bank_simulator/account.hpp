@@ -3,7 +3,7 @@ Header file for account class
 ALwalid Kiawu, 7/5/2026, 11:17AM
 */
 
-#ifndef 
+#ifndef ACCOUNT_HPP_
 #define ACCOUNT_HPP_
 
 using namespace std;
@@ -23,15 +23,11 @@ class Account{
         //getters
         int getAccountNumber();
         string getClientName();
-        string getAccountType();
         int getBalance(); 
-
-        //setters
-        void setAccountNumber(int account_number);
-
-        void deposit();
-        void withdrawal();
         string getStatement();
+
+        void deposit(int amount);
+        void withdrawal(int amount);
         
 
 };
