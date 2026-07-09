@@ -5,7 +5,6 @@ ALwalid Kiawu, 7/7/2026, 9:12PM
 
 #include "acount.hpp"
 #include "client.hpp"
-#include <iostream>
 #include <cstring>
 using namespace std;
 
@@ -44,6 +43,10 @@ string Account::getClientName(){
 
 int Account::getBalance(){
     return balance;
+}
+
+int Account::getPIN(){
+    return PIN;
 }
 
 string Account::getStatement(){

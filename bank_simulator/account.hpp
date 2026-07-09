@@ -23,6 +23,7 @@ class Account{
         //getters
         int getAccountNumber();
         string getClientName();
+        int getPIN();
         int getBalance(); 
         string getStatement();
 
