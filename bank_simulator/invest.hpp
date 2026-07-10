@@ -12,12 +12,10 @@ class Invest{
 
     private:
 
-        int stock_value;
-        int available_to_trade;
-        vector <string> stocks;
-        vector <int> stock_values;
-        vector <string> stocks_bought;
-        vector <int> stock_values_bought;
+        double stock_value;
+        double available_to_trade;
+        vector <Stock> stocks;
+        vector <Stock> stocks_bought;
         string trade_history;
 
     public:
@@ -26,9 +24,9 @@ class Invest{
 
         void transfer(Account &account, int amount);
 
-        void buy_stock(int amount);
+        void buy_stock();
 
-        void sell_stock(int amount);
+        void sell_stock();
 
         string getTradeHistory();
 
