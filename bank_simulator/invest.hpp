@@ -14,8 +14,7 @@ class Invest{
 
         double stock_value;
         double available_to_trade;
-        vector <Stock> stocks;
-        vector <Stock> stocks_bought;
+        vector <Holding> holdings;
         string trade_history;
 
     public:
@@ -24,9 +23,9 @@ class Invest{
 
         void transfer(Account &account, int amount);
 
-        void buy_stock();
+        double execute_buy(int stock_index, double dollar_amount);
 
-        void sell_stock();
+        void execute_sell(int stock_index, double quantity);
 
         string getTradeHistory();
 
