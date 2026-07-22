@@ -6,6 +6,9 @@ ALwalid Kiawu, 7/5/2026, 11:17AM
 #ifndef ACCOUNT_HPP_
 #define ACCOUNT_HPP_
 
+#include <string>
+#include "client.hpp"
+
 using namespace std;
 
 class Account{
@@ -14,21 +17,21 @@ class Account{
         int account_number;
         string client_name;
         int PIN;
-        int balance;
+        double balance;
         string statement;
 
     public:
-        Account(Client client, int PIN);
+        Account(Client client, int Pin);
 
         //getters
         int getAccountNumber();
         string getClientName();
         int getPIN();
-        int getBalance(); 
+        double getBalance(); 
         string getStatement();
 
-        void deposit(int amount);
-        void withdrawal(int amount);
+        void deposit(double amount);
+        void withdraw(double amount);
         
 
 };

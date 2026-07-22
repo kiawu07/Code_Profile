@@ -50,4 +50,43 @@ class InsufficientSharesException : public exception {
         const char* what() const noexcept override { return message.c_str(); }
 
 };
+
+class InvalidPINException : public exception{
+
+    string message;
+
+    public:
+
+    InvalidPINException(string m){
+        message = m;
+    }
+
+    const char* what() const noexcept override {return message.c_str();}
+};
+
+class InvalidQuantityException : public exception{
+
+    string message;
+
+    public:
+
+    InvalidQuantityException(string m){
+        message = m;
+    }
+
+    const char* what() const noexcept override {return message.c_str();}
+};
+
+class NoHoldingsException : public exception{
+
+    string message;
+
+    public:
+
+    NoHoldingsException(string m){
+        message = m;
+    }
+
+    const char* what() const noexcept override {return message.c_str();}
+};
 #endif

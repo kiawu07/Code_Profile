@@ -3,17 +3,18 @@ Implementation file for account class
 ALwalid Kiawu, 7/7/2026, 9:12PM
 */
 
-#include "acount.hpp"
+#include "account.hpp"
 #include "client.hpp"
 #include <cstring>
 using namespace std;
 
 //constructor
-Account::Account(Client client, int PIN){
-    this->client_name = client.getName();
-    this->PIN = PIN;
-    this->balance = 0;
-    this->statement = "";
+Account::Account(Client client, int Pin){
+    client_name = client.getName();
+    account_number = 0;
+    PIN = Pin;
+    balance = 0;
+    statement = "";
 
     //hash to generate account number
     string s_num = "";
@@ -41,7 +42,7 @@ string Account::getClientName(){
     return client_name;
 }
 
-int Account::getBalance(){
+double Account::getBalance(){
     return balance;
 }
 
@@ -54,13 +55,14 @@ string Account::getStatement(){
 }
 
 //deposit and withdrawal
-void Acount::deposit(int amount){
+void Account::deposit(double amount){
     balance += amount;
     statement +="\n";
     statement +="You deposited " + to_string(amount) + " to your account";
 }
 
-void Acount::withdraw(int amount){
+void Account::withdraw(double amount){
     balance -= amount;
-    statement +="You withdrew " + to_string(amount) + " from your account";
+    statement += "\n";
+    statement += "You withdrew " + to_string(amount) + " from your account";
 }

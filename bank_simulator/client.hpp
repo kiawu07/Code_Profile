@@ -5,6 +5,7 @@ Alwalid Kiawu, July 2, 2026, 5:10 PM
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 
+#include <string>
 
 using namespace std;
 
