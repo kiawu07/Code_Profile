@@ -38,6 +38,8 @@ class Invest{
         double networth();
 
         string getTradeHistory();
+
+        void advance();
 };
 
 #endif

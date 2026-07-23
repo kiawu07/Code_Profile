@@ -12,6 +12,7 @@ ALwalid Kiawu, 7/8/2026, 9:12PM
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 using namespace std;
 
 const string STOCKS_FILE = "stocks.csv";
@@ -147,4 +148,14 @@ double Invest::networth(){
 
 string Invest::getTradeHistory(){
     return trade_history;
+}
+
+void Invest::Advance(){
+    for(Stock &stock : stocks){
+        int percentage = (rand() % 11) -5;// -5% to +5%
+        stock.value += stock.value * (percentage/100.0);// update stock value by percentage
+        if(stock.value < 0){
+            stock.value = 1.0; // prevent negative stock value
+        }
+    }
 }
