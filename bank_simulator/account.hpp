@@ -30,6 +30,8 @@ class Account{
         double getBalance(); 
         string getStatement();
 
+        void displayAccountInfo();
+
         void deposit(double amount);
         void withdraw(double amount);
         

@@ -3,10 +3,9 @@
 #include <iostream>
 using namespace std;
 
-Client::Client(string name, int age, int SSN, string address, string nationality){
+Client::Client(string name, int age, string address, string nationality){
     this->name = name;
     this->age = age;
-    this->SSN = SSN;
     this->address = address;
     this->nationality = nationality;
 }
@@ -20,8 +19,11 @@ int Client::getAge(){
     return age;
 }
 
-int Client::getSSN(){
-    return SSN;
+void Client::displayClientInfo(){
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
+    cout << "Address: " << address << endl;
+    cout << "Nationality: " << nationality << endl;
 }
 
 string Client::getAddress(){

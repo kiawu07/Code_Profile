@@ -15,19 +15,18 @@ class Client{
     private:
         string name;
         int age;
-        int SSN;
         string address;
         string nationality;
 
     public:
-        Client(string name, int age, int SSN, string address, string nationality);
+        Client(string name, int age, string address, string nationality);
 
         //Getters
         string getName();
         int getAge();
-        int getSSN();
         string getAddress();
-        string getNationality(); 
+        string getNationality();
+        void displayClientInfo();
 };
 
 

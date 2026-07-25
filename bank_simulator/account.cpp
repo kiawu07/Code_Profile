@@ -54,6 +54,11 @@ string Account::getStatement(){
     return statement;
 }
 
+void Account::displayAccountInfo(){
+    cout << "Account Number: " << account_number << endl;
+    cout << "Balance: $" << balance << endl;
+}
+
 //deposit and withdrawal
 void Account::deposit(double amount){
     balance += amount;

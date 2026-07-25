@@ -13,6 +13,7 @@ ALwalid Kiawu, 7/8/2026, 9:12PM
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+#include <iomanip>
 using namespace std;
 
 const string STOCKS_FILE = "stocks.csv";
@@ -48,8 +49,6 @@ double Invest::transfer_to_trade(Account &account, double amount, int PIN){
     if(account.getPIN() != PIN){
         throw InvalidPINException("Invalid PIN");
     }
-    
-
     //cheking bank balance
     if(account.getBalance() < amount){
         throw InsufficientFundsException("Insufficient funds to transfer to trade");
@@ -148,6 +147,25 @@ double Invest::networth(){
 
 string Invest::getTradeHistory(){
     return trade_history;
+}
+
+void Invest::displayStocks(){
+    cout << "Available Stocks for Trading:\n";
+    cout << left << setw(5) << "No." << setw(15) << "Name" << setw(7) << "Symbol" << "Value" << endl;
+    for(int index = 0; index != stocks.size(); index++){
+        cout << left << setw(5) << index +1 << setw(15) << stocks[index].name << setw(7) << stocks[index].symbol;
+        cout << fixed << setprecision(2) << stocks[index].value << endl;
+    }
+}
+
+void Invest::displayHoldings(){
+    cout << "Your Current Holdings:\n";
+    cout << left << setw(5) << "No." << setw(15) << "Name" << setw(7) << "Symbol" << setw(10) << "Quantity" << "Value" << endl;
+    for(int index = 0; index != holdings.size(); index++){
+        cout << left << setw(5) << index +1 << setw(15) << holdings[index].name << setw(7) << holdings[index].symbol;
+        cout << fixed << setprecision(2) << holdings[index].quantity << " " << holdings[index].value << endl;
+    }
+
 }
 
 void Invest::Advance(){

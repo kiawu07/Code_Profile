@@ -39,6 +39,9 @@ class Invest{
 
         string getTradeHistory();
 
+        void displayStocks();
+        void displayHoldings();
+
         void advance();
 };
 
