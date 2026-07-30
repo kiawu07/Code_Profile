@@ -6,12 +6,12 @@ ALwalid Kiawu, 7/7/2026, 9:12PM
 #include "account.hpp"
 #include "client.hpp"
 #include <cstring>
+#include <iostream>
 using namespace std;
 
 //constructor
 Account::Account(Client client, int Pin){
     client_name = client.getName();
-    account_number = 0;
     PIN = Pin;
     balance = 0;
     statement = "";
@@ -20,7 +20,7 @@ Account::Account(Client client, int Pin){
     string s_num = "";
     
     for(unsigned char x : client.getName()){
-        if(s_num.size() < 7)break;
+        if(s_num.size() >= 7)break;
             s_num += to_string(int(tolower(x)));
             
         }

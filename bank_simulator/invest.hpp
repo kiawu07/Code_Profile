@@ -26,6 +26,8 @@ class Invest{
 
         Invest();
 
+        double getAvailableToTrade();
+
         double transfer_to_trade(Account &account, double amount, int PIN);
         double transfer_to_bank(Account &account, double amount, int PIN);
 
@@ -42,7 +44,7 @@ class Invest{
         void displayStocks();
         void displayHoldings();
 
-        void advance();
+        void Advance();
 };
 
 #endif

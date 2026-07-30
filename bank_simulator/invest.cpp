@@ -9,6 +9,7 @@ ALwalid Kiawu, 7/8/2026, 9:12PM
 #include "holding.hpp"
 #include "exceptions.hpp"
 #include <string>
+#include <iostream>
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -42,6 +43,7 @@ Invest::Invest(){
         stock.value = value;
         stocks.push_back(stock);
     }
+    in_file.close();
     
 }
 
@@ -88,9 +90,6 @@ double Invest::execute_buy(int stock_index, double dollar_amount){
     if(stock_index < 0 || stock_index >= stocks.size()){
         throw InvalidChoiceException("Invalid stock index");
     }
-    if(dollar_amount <= 0){
-        throw InvalidChoiceException("Dollar amount must be greater than 0");
-    }
     if(dollar_amount > available_to_trade){
         throw InsufficientFundsException("Insufficient funds to execute buy");
     }
@@ -101,6 +100,7 @@ double Invest::execute_buy(int stock_index, double dollar_amount){
     available_to_trade -= dollar_amount;
     return quantity;
     }
+
 
 
 double Invest::execute_sell(int stock_index, double quantity){
@@ -132,10 +132,7 @@ double Invest::execute_sell(int stock_index, double quantity){
 
 
 double Invest::networth(){
-    if (holdings.size() == 0){
-        return 0;
-    }
-    double tot_val = 0;
+    double tot_val = available_to_trade;
     for(Holding holding: holdings){
         string symbol = holding.symbol;
         double the_quantity = holding.quantity;
@@ -147,6 +144,10 @@ double Invest::networth(){
 
 string Invest::getTradeHistory(){
     return trade_history;
+}
+
+double Invest::getAvailableToTrade(){
+    return available_to_trade;
 }
 
 void Invest::displayStocks(){
@@ -163,7 +164,7 @@ void Invest::displayHoldings(){
     cout << left << setw(5) << "No." << setw(15) << "Name" << setw(7) << "Symbol" << setw(10) << "Quantity" << "Value" << endl;
     for(int index = 0; index != holdings.size(); index++){
         cout << left << setw(5) << index +1 << setw(15) << holdings[index].name << setw(7) << holdings[index].symbol;
-        cout << fixed << setprecision(2) << holdings[index].quantity << " " << holdings[index].value << endl;
+        cout << fixed << setprecision(2) << holdings[index].quantity << " " << holdings[index].cost_basis << endl;
     }
 
 }

@@ -1,0 +1,31 @@
+============KIAgrowTm*==============
+
+
+Client Info(s)...
+Name: Alwalid Kiawu
+Age: 19
+Address: St. Olaf College
+Nationality: Liberian
+
+
+Bank Account Info(s)...
+Account Number: 9710811
+Balance: $911.75
+
+
+Bank Account Statements...
+
+You deposited 1000.000000 to your account
+You withdrew 1000.000000 from your account
+You deposited 911.750000 to your account
+
+Investment Account Info...
+Available to Trade: $0.00
+Investment Worth: $18.61
+Trade Histories...
+
+You bought 14.285714 shares of The Coca-Cola Company (KO) for $1000.000000
+You sold 14.000000 shares of The Coca-Cola Company (KO) for $911.754682
+
+From $1,000 initial deposit, your total net worth is: $930.36
+Thank you for using KIAgrowTm* Investment Bank Simulator by Alwalid Kiawu!
