@@ -100,7 +100,9 @@ int main(){
 
 //functions defination
 void intro(){
-    cout << "\n============KIAgrowTm*==============\n";
+    cout << "\n=============================================================\n";
+    cout << "           KAIgrowTm* Investment Bank Simulator \n";
+    cout << "  ============================================================== \n";
     cout << "Welcome to KIAGrowTm* Investment Bank Simulator by Alwalid Kiawu!\n";
     cout << "This program simulates a simple banking system where clients can create accounts, deposit and withdraw money, and invest in stocks.\n";
     cout << "You will be able to create an account, transfer money to/from your investing account, invest in stocks, and advance time to see how your investments perform.\n";
@@ -135,20 +137,21 @@ Client create_client(){
 
 void dashboard(Account &account, Invest &invest, Client &client){
     cout << "\n=================DASHBOARD=================\n";
+    cout << fixed << setprecision(2);
     cout << "CLIENT INFORMATION:\n";
     client.displayClientInfo();
     cout << "\n";
     cout << "ACCOUNT INFORMATION:\n";
     account.displayAccountInfo();
-    cout << "Available to Trade in Investment Account: " << invest.getAvailableToTrade() << endl;
-    cout << "Your Investment Account Worth: " << invest.networth() << endl;
-    cout << "Your total net worth is: " << account.getBalance() + invest.networth() << endl;
+    cout << "Available to Trade in Investment Account: $" << invest.getAvailableToTrade() << endl;
+    cout << "Your Investment Account Worth: $" << invest.networth() << endl;
+    cout << "Your total net worth is: $" << account.getBalance() + invest.networth() << endl;
     cout << "===========================================\n\n";
 }
 
 void main_menu(){
     cout << "\n================MAIN MENU=================\n";
-    cout << "Enter...:\n";
+    cout << "Please select an option:\n";
     cout << "1. Transfer Money\n";
     cout << "2. Invest in Stocks\n";
     cout << "3. Advance Time\n";
@@ -291,21 +294,23 @@ void report(Account &account, Invest &invest, Client &client){
     ofstream report;
     report.open("reports.txt");
     report << fixed << setprecision(2);
-    report << "============KIAgrowTm*==============\n\n\n";
-    report << "Client Info(s)...\n";
+    report << "=============================================================\n\n";
+    report << "       KIAgrowTm* Investment Bank Simulator Report\n";
+    report << "=============================================================\n\n";
+    report << "CLIENT INFORMATION(s)\n";
     report << "Name: " << client.getName() << endl;
     report << "Age: " << client.getAge() << endl;
     report << "Address: " << client.getAddress() << endl;
     report << "Nationality: " << client.getNationality() << endl;
-    report << "\n\n";
-    report << "Bank Account Info(s)...\n";
+    report << "\n";
+    report << "BANK ACCOUNT INFORMATION(s)\n";
     report << "Account Number: " << account.getAccountNumber() << endl;
     report << "Balance: $" << account.getBalance() << endl;
-    report << "\n\n";
-    report << "Bank Account Statements...\n";
+    report << "\n";
+    report << "BANK ACCOUNT STATEMENTS";
     report << account.getStatement();
-    report << "\n\n";
-    report << "Investment Account Info...\n";
+    report << "\n";
+    report << "INVESTMENT ACCOUNT INFORMATION\n";
     report << "Available to Trade: $" << invest.getAvailableToTrade() << endl;
     report << "Investment Worth: $" << invest.networth() << endl;
     report << "Trade Histories...\n";
