@@ -110,7 +110,7 @@ double Invest::execute_sell(int stock_index, double quantity){
     if(stock_index < 0 || stock_index >= holdings.size()){
             throw InvalidChoiceException("Invalid stock index");
         }
-    if(quantity <= 0 || quantity <= -2){
+    if(quantity == 0 || quantity <= -2){
         throw InvalidQuantityException("Quantity must be greater than 0 or -1 to sell all");
     }
     if(quantity > holdings[stock_index].quantity){
