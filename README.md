@@ -11,8 +11,8 @@ a simulated stock market with buy/sell functionality, custom exception handling,
 **Skills:** C++, OOP, exception handling, unit testing, file I/O
 
 ### [Fitness_Tracker](./Fitness_Tracker)
-A C++ command-line fitness simulator - exercise tracking, meal recommendation, calories counter/tracking
-**Skills:** C++, OPP, file I/O Data operations
+A C++ command-line fitness simulator - exercise tracking, meal recommendation, calorie counter/tracking
+**Skills:** C++, OPP, file I/O, Data operations
 
 ## About Me
 
