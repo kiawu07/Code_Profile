@@ -110,19 +110,21 @@ double Invest::execute_sell(int stock_index, double quantity){
     if(stock_index < 0 || stock_index >= holdings.size()){
             throw InvalidChoiceException("Invalid stock index");
         }
-    if(quantity <= 0){
-        throw InvalidQuantityException("Quantity must be greater than 0");
+    if(quantity <= 0 || quantity <= -2){
+        throw InvalidQuantityException("Quantity must be greater than 0 or -1 to sell all");
     }
     if(quantity > holdings[stock_index].quantity){
         throw InsufficientSharesException("Insufficient quantity of shares to sell");
     }
     double curr_price = getStockValue(holdings[stock_index].symbol);
-    double proceeds = quantity * curr_price;
-    if(quantity >= holdings[stock_index].quantity){
-        trade_history += "\nYou sold all of " + holdings[stock_index].name + " (" + holdings[stock_index].symbol + ") for $" + to_string(proceeds);
+    double proceeds;
+    if(quantity == -1){
+        proceeds = holdings[stock_index].quantity * curr_price;
+        trade_history += "\nYou sold all of " + holdings[stock_index].name + " (" + holdings[stock_index].symbol + ") for $" + to_string(proceeds); 
         available_to_trade += proceeds;
         holdings.erase(holdings.begin() + stock_index);
     }else{
+        proceeds = quantity * curr_price;
         holdings[stock_index].quantity -= quantity;
         trade_history += "\nYou sold " + to_string(quantity) + " shares of " + holdings[stock_index].name + " (" + holdings[stock_index].symbol + ") for $" + to_string(proceeds);
         available_to_trade += proceeds;
@@ -152,18 +154,18 @@ double Invest::getAvailableToTrade(){
 
 void Invest::displayStocks(){
     cout << "Available Stocks for Trading:\n";
-    cout << left << setw(5) << "No." << setw(15) << "Name" << setw(7) << "Symbol" << "Value" << endl;
+    cout << left << setw(5) << "No." << setw(25) << "Name" << setw(7) << "Symbol" << "Value $" << endl;
     for(int index = 0; index != stocks.size(); index++){
-        cout << left << setw(5) << index +1 << setw(15) << stocks[index].name << setw(7) << stocks[index].symbol;
+        cout << left << setw(5) << index +1 << setw(25) << stocks[index].name << setw(7) << stocks[index].symbol;
         cout << fixed << setprecision(2) << stocks[index].value << endl;
     }
 }
 
 void Invest::displayHoldings(){
     cout << "Your Current Holdings:\n";
-    cout << left << setw(5) << "No." << setw(15) << "Name" << setw(7) << "Symbol" << setw(10) << "Quantity" << "Value" << endl;
+    cout << left << setw(5) << "No." << setw(25) << "Name" << setw(7) << "Symbol" << setw(10) << "Quantity" << "Value $" << endl;
     for(int index = 0; index != holdings.size(); index++){
-        cout << left << setw(5) << index +1 << setw(15) << holdings[index].name << setw(7) << holdings[index].symbol;
+        cout << left << setw(5) << index +1 << setw(25) << holdings[index].name << setw(7) << holdings[index].symbol;
         cout << fixed << setprecision(2) << holdings[index].quantity << " " << holdings[index].cost_basis << endl;
     }
 

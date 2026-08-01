@@ -100,9 +100,9 @@ int main(){
 
 //functions defination
 void intro(){
-    cout << "\n=============================================================\n";
+    cout << "\n=============================================================== \n";
     cout << "           KAIgrowTm* Investment Bank Simulator \n";
-    cout << "  ============================================================== \n";
+    cout << "=============================================================== \n";
     cout << "Welcome to KIAGrowTm* Investment Bank Simulator by Alwalid Kiawu!\n";
     cout << "This program simulates a simple banking system where clients can create accounts, deposit and withdraw money, and invest in stocks.\n";
     cout << "You will be able to create an account, transfer money to/from your investing account, invest in stocks, and advance time to see how your investments perform.\n";
@@ -144,8 +144,8 @@ void dashboard(Account &account, Invest &invest, Client &client){
     cout << "ACCOUNT INFORMATION:\n";
     account.displayAccountInfo();
     cout << "Available to Trade in Investment Account: $" << invest.getAvailableToTrade() << endl;
-    cout << "Your Investment Account Worth: $" << invest.networth() << endl;
-    cout << "Your total net worth is: $" << account.getBalance() + invest.networth() << endl;
+    cout << "Your Total Investment Account Worth: $" << invest.networth() << endl;
+    cout << "Your Combined net worth is: $" << account.getBalance() + invest.networth() << endl;
     cout << "===========================================\n\n";
 }
 
@@ -162,7 +162,8 @@ void main_menu(){
 void transfer_money(Account &account, Invest &invest){
     // Implementation for transferring money
     cout << "\n\n";
-    cout << "Transferring Money......\n";
+    cout << "TRANSFER MONEY\n";
+    cout << fixed << setprecision(2);
     cout << "Enter 1, to tranfer money from your bank account to your investment account\n";
     cout << "Enter 2, to transfer money from your investment account to your bank account\n";
     int choice;
@@ -189,11 +190,11 @@ void transfer_money(Account &account, Invest &invest){
         if(choice == 1){
             cout << "Tranfering money from your bank account to your investment account\n";
             invest.transfer_to_trade(account, amount, PIN);
-            cout << "Confirmation of the transfer of " << amount << " to investment account\n";
+            cout << "Confirmation of the transfer of $" << amount << " to investment account\n";
         }else{
             cout << "Tranfering money from your investment account to your bank account\n";
             invest.transfer_to_bank(account, amount, PIN);
-            cout << "Confirmation of the transfer of " << amount << " to bank account\n";
+            cout << "Confirmation of the transfer of $" << amount << " to bank account\n";
         }
     }catch(InvalidPINException &e){
         cout << e.what() << endl;
@@ -207,7 +208,7 @@ void transfer_money(Account &account, Invest &invest){
 void invest_menu(Invest &invest, Account &account){
     // Implementation for investing menu
     cout << "\n\n";
-    cout << "Investing in Stocks......\n";
+    cout << "INVESTING IN STOCKS\n";
     cout << "Enter 1, to buy stocks\n";
     cout << "Enter 2, to sell some of your holdings\n";
     int choice;
@@ -238,7 +239,7 @@ void invest_menu(Invest &invest, Account &account){
         //executing buy
         try{
             double quantity_bought = invest.execute_buy(stock_index - 1, fee);
-            cout << "Confirmation of the purchase of " << quantity_bought << " of stocks for $" << fee << endl;
+            cout << "Confirmation of the purchase of " << quantity_bought << " shares for $" << fee << endl;
         }catch(InvalidChoiceException &e){
             cout << e.what() << endl;
         }catch(InsufficientFundsException &e){
@@ -256,8 +257,8 @@ void invest_menu(Invest &invest, Account &account){
         cin.ignore(1000,'\n');
         }
         double quantity;
-        cout << "Enter the quantity of shares you wish to sell\n";
-        while(!(cin>>quantity) || quantity <= 0){
+        cout << "Enter the quantity of shares you wish to sell, or -1 to sell all\n";
+        while(!(cin>>quantity) || (quantity <= 0 && quantity != -1)){
             cout << "Please enter a valid quantity!!\n";
             cin.clear();
             cin.ignore(1000,'\n');
@@ -266,7 +267,11 @@ void invest_menu(Invest &invest, Account &account){
         //executing sell
         try{
             double proceeds = invest.execute_sell(stock_index - 1, quantity);
-            cout << "Confirmation of the sale of " << quantity << " shares" << " for $" << proceeds << endl;
+            if(quantity == -1){
+                cout << "Confirmation of the sale of all shares for $" << proceeds << endl;
+            }else{
+                cout << "Confirmation of the sale of " << quantity << " shares for $" << proceeds << endl;
+            }
         }catch(InvalidChoiceException &e){
             cout << e.what() << endl;
         }catch(InsufficientSharesException &e){
@@ -279,7 +284,7 @@ void invest_menu(Invest &invest, Account &account){
 void advance(int &days, Invest &invest){
     // Implementation for advancing time
     cout << "\n\n";
-    cout << "Advancing Time......\n";
+    cout << "ADVANCING TIME\n";
     cout << "Advancing time, watch out for the market fluctuations and see how your investments perform!\n";
     cout << "Day " << days << ":\n";
     days++;
@@ -328,7 +333,7 @@ void outro(Account &account, Invest &invest){
     cout << "Thank you for using KIAgrowTm* Investment Bank Simulator by Alwalid Kiawu!\n";
     cout << "At the end of the simulation, your investment account worth is: $" << invest.networth() << endl;
     cout << "Your bank account balance is: $" << account.getBalance() << endl;
-    cout << "Your total net worth is: $" << account.getBalance() + invest.networth() << endl;
+    cout << "Your combined net worth is: $" << account.getBalance() + invest.networth() << endl;
     cout << "We hope you enjoyed the experience and learned something about investing in stocks.\n";
     cout << "Goodbye!\n";
 }
