@@ -63,11 +63,11 @@ void Account::displayAccountInfo(){
 void Account::deposit(double amount){
     balance += amount;
     statement +="\n";
-    statement +="You deposited " + to_string(amount) + " to your account";
+    statement +="You deposited $" + to_string(amount) + " to your account";
 }
 
 void Account::withdraw(double amount){
     balance -= amount;
     statement += "\n";
-    statement += "You withdrew " + to_string(amount) + " from your account";
+    statement += "You withdrew $" + to_string(amount) + " from your account";
 }
