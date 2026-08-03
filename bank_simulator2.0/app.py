@@ -33,6 +33,7 @@ if st.session_state.client == None:
 
 #client is already in session_state so now let's use it for client,account and invest and don't reset
 else:
+    #retrieving previous data that was in session state
     client = st.session_state.client
     account = st.session_state.account
     invest = st.session_state.invest
@@ -46,3 +47,38 @@ else:
     st.write(f"**Bank Account Balance:** ${account.get_balance():.2f}")
     st.write(f"**Available to Trade:** ${invest.get_available_to_trade():.2f}")
     st.write(f"**Net Worth:** ${invest.networth():.2f}")
+
+    #tabs
+    tab1, tab2, tab3 = st.tabs(["Transfer Money", "Invest in Stocks","Advance Time"])
+
+    with tab1:
+        st.subheader("Transfer Money to/from accounts")
+        direction = st.radio("Transfer Direction",["Bank to Investment","Investment to Bank"])
+        amount = st.number_input("How much would you like to tranfer")
+        pin_input = st.number_input("Enter your PIN", min_value=1000, max_value=9999)
+
+        if st.button("Tranfer Money"):
+            try:
+                if direction == "Bank to Investment":
+                    invest.transfer_to_trade(account, amount, pin_input)
+                else:
+                    invest.transfer_to_bank(account,amount,pin_input)
+                st.success(f"Tranfered ${amount:.2f} successfully")
+                st.rerun()
+            except Exception as e:
+                st.error(str(e))
+
+
+    with tab2:
+        st.subheader("Buy/Sell Stocks")
+        direction = st.radio("Invest Direction",["Buy stocks","Sell stocks"])
+
+        if direction == "Buy stocks":
+            st.selectbox("Select a stock to buy",["cat","rat"])
+
+
+    with tab3:
+        st.subheader("Advancing and Simulating Investments")
+
+
+
