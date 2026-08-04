@@ -40,14 +40,20 @@ else:
     invest = st.session_state.invest
 
     st.subheader("Dashboard")
-    st.write(f"**Name:** {client.get_name()}")
-    st.write(f"**Age:** {client.get_age()}")
-    st.write(f"**Address:** {client.get_address()}")
-    st.write(f"**Nationality:** {client.get_nationality()}")
-    st.write(f"**Bank Account Number:** {account.get_account_num()}")
-    st.write(f"**Bank Account Balance:** ${account.get_balance():.2f}")
-    st.write(f"**Available to Trade:** ${invest.get_available_to_trade():.2f}")
-    st.write(f"**Net Worth:** ${invest.networth():.2f}")
+
+    col1,col2 = st.columns(2)
+
+    with col1:
+        st.write(f"**Name:** {client.get_name()}")
+        st.write(f"**Age:** {client.get_age()}")
+        st.write(f"**Address:** {client.get_address()}")
+        st.write(f"**Nationality:** {client.get_nationality()}")
+
+    with col2:
+        st.write(f"**Bank Account Number:** {account.get_account_num()}")
+        st.write(f"**Bank Account Balance:** ${account.get_balance():.2f}")
+        st.write(f"**Available to Trade:** ${invest.get_available_to_trade():.2f}")
+        st.write(f"**Net Worth:** ${invest.networth():.2f}")
 
     #tabs
     tab1, tab2, tab3 = st.tabs(["Transfer Money", "Invest in Stocks","Advance Time"])
@@ -75,9 +81,8 @@ else:
         direction = st.radio("Invest Direction",["Buy stocks","Sell stocks"])
 
         if direction == "Buy stocks":
-            if st.button("Click to display stocks"):
-                df =  pd.DataFrame([{"Name":s.name,"Symbol":s.symbol,"Value":s.value}for s in invest.stocks])
-                st.table(df)
+            df =  pd.DataFrame([{"Name":s.name,"Symbol":s.symbol,"Value":s.value}for s in invest.stocks])
+            st.table(df)
 
             choice = st.selectbox("Select the symbol of the stock you wish to buy",[s.symbol for s in invest.stocks])
             stock_index = [s.symbol for s in invest.stocks].index(choice)
@@ -92,27 +97,70 @@ else:
                     st.error(str(e))
 
         else:
-            if st.button("Click to display Holdings"):
+
+            if len(invest.holdings) == 0:
+                st.write("You have no holdings to sell.")
+            else:
                 df = pd.DataFrame([{"Name":h.name,"Symbol":h.symbol,"Quantity":h.quantity,"Cost Basis":h.cost_basis}for h in invest.holdings])
                 st.table(df)
 
-            choice = st.selectbox("Select the holding you wish to sell",[h.symbol for h in invest.holdings])
-            stock_index = [h.symbol for h in invest.holdings].index(choice)
-            quantity = st.slider("Enter the quantity you wish to sell",min_value = -1.0, max_value = invest.holdings[stock_index].quantity)
+                choice = st.selectbox("Select the holding you wish to sell",[h.symbol for h in invest.holdings])
+                stock_index = [h.symbol for h in invest.holdings].index(choice)
 
-            if st.button("Execute Sale"):
-                try:
-                    proceeds = invest.execute_sell(stock_index,quantity)
-                    st.success(f"Sold {quantity:.4f} shares of {choice} for ${proceeds:.2f}")
-                    st.rerun()
-                except Exception as e:
-                    st.error(str(e))
+                sell_all = st.checkbox("Sell all shares")
+                if sell_all:
+                    quantity = -1
+                else:
+                    quantity = st.slider("Enter the quantity you wish to sell",min_value = 0.0, max_value = invest.holdings[stock_index].quantity)
 
-
-
+                if st.button("Execute Sale"):
+                    try:
+                        proceeds = invest.execute_sell(stock_index,quantity)
+                        st.success(f"Sold shares of {choice} for ${proceeds:.2f}")
+                        st.rerun()
+                    except Exception as e:
+                        st.error(str(e))
 
     with tab3:
-        st.subheader("Advancing and Simulating Investments")
+        st.subheader("Stock Market")
+
+        if(len(invest.holdings)) == 0:
+            st.write("You have no holdings, buy some stock to view the market")
+
+        else:
+            st.write("**Current Prices:**")
+            prices = [[h.symbol,invest.get_stock_value(h.symbol)]for h in invest.holdings]
+            df = pd.DataFrame(prices, columns=["Symbol","Price"])
+            st.table(df)
+
+            st.divider()
+
+            if(len(invest.history)) == 0:
+                st.write("Advance time to see stock performance")
+            else:
+                df = pd.DataFrame(invest.history)
+                df = df.set_index("Day")
+                st.line_chart(df)
+
+
+            col1,col2 = st.columns(2)
+
+            with col1:
+                if st.button("Advance a Day"):
+                    invest.advance()
+                    st.rerun()
+
+            with col2:
+                if st.button("Advance 10 days"):
+                    for i in range(10):
+                        invest.advance()
+                    st.rerun()
+
+
+
+st.caption("Disclaimer: KIAGrowTM* is a simulation and does not represent real financial advice or investment opportunities. All investments carry risk, and past performance is not indicative of future results. Users are encouraged to seek professional financial advice before making any investment decisions.")
+st.caption("Made and designed by Alwalid Prince Kiawu")
+
 
 
 

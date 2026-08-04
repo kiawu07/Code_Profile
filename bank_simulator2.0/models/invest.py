@@ -34,6 +34,8 @@ class Invest():
         self.trade_history = ""
         self.stocks = []
         self.holdings = []
+        self.day = 1
+        self.history = []
 
         with open('data/stocks.csv', 'r') as input_file:
 
@@ -133,11 +135,20 @@ class Invest():
         return self.available_to_trade
 
     def advance(self):
+        self.day += 1
         for stock in self.stocks:
             percentage = random.randint(-5,5)
             stock.value += stock.value * (percentage/100)
             if stock.value < 0:
                 stock.value = 1.0
+
+        #putting the stock which has been bought in history list
+        record = {"Day":self.day}
+        for h in self.holdings:
+            record[h.name] = self.get_stock_value(h.symbol)
+        self.history.append(record)
+
+
 
         
     
