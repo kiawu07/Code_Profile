@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from models.account import Account
 from models.client import Client
 from models.invest import Invest
@@ -74,7 +75,40 @@ else:
         direction = st.radio("Invest Direction",["Buy stocks","Sell stocks"])
 
         if direction == "Buy stocks":
-            st.selectbox("Select a stock to buy",["cat","rat"])
+            if st.button("Click to display stocks"):
+                df =  pd.DataFrame([{"Name":s.name,"Symbol":s.symbol,"Value":s.value}for s in invest.stocks])
+                st.table(df)
+
+            choice = st.selectbox("Select the symbol of the stock you wish to buy",[s.symbol for s in invest.stocks])
+            stock_index = [s.symbol for s in invest.stocks].index(choice)
+            amount = st.number_input("Enter the price you wish to pay",min_value =0.01)
+
+            if st.button("Execute Buy"):
+                try:
+                    quantity = invest.execute_buy(stock_index,amount)
+                    st.success(f"Bought {quantity:.4f} shares of {choice} for ${amount:.2f}")
+                    st.rerun()
+                except Exception as e:
+                    st.error(str(e))
+
+        else:
+            if st.button("Click to display Holdings"):
+                df = pd.DataFrame([{"Name":h.name,"Symbol":h.symbol,"Quantity":h.quantity,"Cost Basis":h.cost_basis}for h in invest.holdings])
+                st.table(df)
+
+            choice = st.selectbox("Select the holding you wish to sell",[h.symbol for h in invest.holdings])
+            stock_index = [h.symbol for h in invest.holdings].index(choice)
+            quantity = st.slider("Enter the quantity you wish to sell",min_value = -1.0, max_value = invest.holdings[stock_index].quantity)
+
+            if st.button("Execute Sale"):
+                try:
+                    proceeds = invest.execute_sell(stock_index,quantity)
+                    st.success(f"Sold {quantity:.4f} shares of {choice} for ${proceeds:.2f}")
+                    st.rerun()
+                except Exception as e:
+                    st.error(str(e))
+
+
 
 
     with tab3:
