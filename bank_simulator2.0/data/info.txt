@@ -1,0 +1,31 @@
+KIAGrowTM* Investment Bank Simulator
+
+User Report
+
+=======Personal Info==========
+Name: Alwalid Prince Kiawu
+Age: 19
+Address: St. Olaf College
+Nationality: Liberian
+
+=======Bank Account Info========
+Account Number: 9710811
+BALANCE: 0.0
+STATEMENTS:
+You deposited 1000 to your accountYou withdrew 1000.0 from your account
+
+=======Investment Account Info========
+Available to trade: 0.0
+Investment Net Worth: 1013.5339470989211
+TRADE HISTORY:
+Transferred $1000.00 to trading account
+You bought 2.3256 shares of Apple Inc. (AAPL) for $ 500.00
+You bought 0.9901 shares of Microsoft Corporation (MSFT) for $ 500.00
+
+
+From $1,000 initial deposit, your total net worth is: $1013.53
+Thanks for using KIAgrowTm* Investment Bank Simulator
+
+
+
+Made and Designed by: Alwalid Prince Kiawu

@@ -18,6 +18,7 @@ from exceptions import (
 class Stock:
     name : str
     symbol: str
+    previous_val: float
     value: float
 
 @dataclass
@@ -44,7 +45,7 @@ class Invest():
 
             for line in lines:
                 data = line.strip().split(',')
-                self.stocks.append(Stock(data[0], data[1], float(data[2])))
+                self.stocks.append(Stock(data[0], data[1], float(data[2]),float(data[2])))
 
     def transfer_to_trade(self, account, amount, PIN):
         if account.get_PIN() != PIN:
@@ -76,6 +77,19 @@ class Invest():
                 return Stock.value
 
         return 0
+
+    def get_percent_change_in_stock_val(self,symbol):
+        for Stock in self.stocks:
+            if Stock.symbol == symbol:
+                change =  (((Stock.value - Stock.previous_val)/Stock.previous_val)*100)
+                if change < 0:
+                    return f"{change:.1f}%"
+                else:
+                    return f"+{change:.1f}%"
+
+        
+        return 0
+            
 
     def execute_buy(self, stock_index, dollar_amount):
         if stock_index < 0 or stock_index >= len(self.stocks):
@@ -137,6 +151,7 @@ class Invest():
     def advance(self):
         self.day += 1
         for stock in self.stocks:
+            stock.previous_val = stock.value 
             percentage = random.randint(-5,5)
             stock.value += stock.value * (percentage/100)
             if stock.value < 0:
@@ -147,6 +162,35 @@ class Invest():
         for h in self.holdings:
             record[h.name] = self.get_stock_value(h.symbol)
         self.history.append(record)
+
+    def info_file(self,account,client):
+
+        with open("data/info.txt",'w') as output_file:
+            output_file.write("KIAGrowTM* Investment Bank Simulator\n\n")
+            output_file.write("User Report\n\n")
+            output_file.write("=======Personal Info==========\n")
+            output_file.write(f"Name: {client.get_name()}\n")
+            output_file.write(f"Age: {client.get_age()}\n")
+            output_file.write(f"Address: {client.get_address()}\n")
+            output_file.write(f"Nationality: {client.get_nationality()}\n\n")
+            output_file.write("=======Bank Account Info========\n")
+            output_file.write(f"Account Number: {account.get_account_num()}\n")
+            output_file.write(f"BALANCE: {account.get_balance()}\n")
+            output_file.write("STATEMENTS:\n")
+            output_file.write(f"{account.get_statement()}\n\n")
+            output_file.write("=======Investment Account Info========\n")
+            output_file.write(f"Available to trade: {self.get_available_to_trade()}\n")
+            output_file.write(f"Investment Net Worth: {self.networth()}\n")
+            output_file.write("TRADE HISTORY:\n")
+            output_file.write(f"{self.get_trade_history()}\n\n")
+            total = self.networth() + account.get_balance()
+            output_file.write(f"From $1,000 initial deposit, your total net worth is: ${total:.2f}\n")
+            output_file.write("Thanks for using KIAgrowTm* Investment Bank Simulator\n\n\n\n")
+            output_file.write("Made and Designed by: Alwalid Prince Kiawu")
+
+
+
+    
 
 
 
