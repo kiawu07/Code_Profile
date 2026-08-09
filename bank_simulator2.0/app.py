@@ -4,13 +4,35 @@ from models.account import Account
 from models.client import Client
 from models.invest import Invest
 
-st.title("KIAGrowTM* Investment Bank Simulator")
-
-st.sidebar.image("data/logo.png",width = 700)
-
 st.set_page_config(
+    page_title="KIAGrow Investment Simulator",
+    page_icon="📈",
     layout="wide"
 )
+
+st.title("KIAGrowTM* Investment Bank Simulator")
+
+st.expander("About this simulator", expanded=False).write(
+    """
+    Welcome to the KIAGrowTM* Investment Bank Simulator! This application allows you to simulate banking and investment activities in a risk-free environment. You can create a bank account, deposit funds, and invest in a variety of stocks. 
+
+    **Features:**
+    - Create a bank account with a unique account number.
+    - Deposit and withdraw funds from your bank account.
+    - Transfer money between your bank account and investment account.
+    - Buy and sell stocks based on real-time simulated market conditions.
+    - Track your portfolio performance over time.
+    - Analyze stock trends and market news to make informed investment decisions.
+    - Download a personalized report of your account and investment activities.
+    - Grow your investment portfolio and monitor your net worth.
+
+    **Disclaimer:** This simulator is for educational purposes only and does not represent real financial advice or investment opportunities. Stocks prices and market conditions, and news are simulated and may not reflect real-world scenarios. Market movements and news are for illustrative purposes only.
+    Success in this simulator does not guarantee success in real-world investing. Always seek professional financial advice before making any investment decisions.
+    Designed and developed by Alwalid Prince Kiawu.
+    """
+)
+
+st.sidebar.image("data/logo.png",width = 700)
 
 #check if client is not in session_state and if not, initialize them and set them to None
 if "client" not in st.session_state:
@@ -18,10 +40,6 @@ if "client" not in st.session_state:
     st.session_state.account = None
     st.session_state.invest = None
 
-#To print sucess message when it is in session state, so that it is not left out by st.rerun()
-if "message" in st.session_state:
-    st.success(st.session_state.message)
-    del st.session_state.message
 
 if st.session_state.client is None:
     st.subheader("Create your account")
@@ -30,7 +48,7 @@ if st.session_state.client is None:
     age = st.number_input("Enter you age", min_value=0, step =1)
     address = st.text_input("Enter your address")
     nationality = st.text_input("Enter your nationality")
-    pin = st.number_input("Enter you 4 digit PIN", min_value = 1000, max_value=9999, step=1)
+    pin = st.number_input("Enter your 4 digit PIN",min_value=0,step=1)
 
     if st.button("Create Account"):
         client = Client(name,age,address,nationality)
@@ -55,6 +73,11 @@ else:
 
     st.subheader("📊Dashboard")
 
+    if "message" in st.session_state:
+        st.success(st.session_state.message)
+        del st.session_state.message
+
+
     st.divider()
 
     col1,col2,col3,col4 = st.columns(4)
@@ -76,7 +99,7 @@ else:
         #writing to file , and downlaoding it
         invest.info_file(account,client)
         with open("data/info.txt","rb") as file:
-            st.sidebar.download_button(label = "Download my info",
+            st.download_button(label = "Download my info",
                                 data = file,
                                 file_name = "info.txt",
                                 mime = "text/plain")
@@ -91,13 +114,13 @@ else:
     col5,col6,col7 = st.columns(3)
 
     with col5:
-        st.metric("Balance",f"${account.get_balance():.2f}")
+        st.metric("💵 Bank Balance",f"${account.get_balance():,.2f}")
 
     with col6:
-        st.metric("Available to Trade",f"${invest.get_available_to_trade():.2f}")
+        st.metric("💰 Available to Trade",f"${invest.get_available_to_trade():,.2f}")
 
     with col7:
-        st.metric("Investment Net worth", f"${invest.networth():.2f}")
+        st.metric("📈 Investment Net Worth", f"${invest.networth():,.2f}")
 
     #tabs
     tab1, tab2, tab3 = st.tabs(["💰Transfer Money", "📈Invest in Stocks","📉Analyze Portfolio"])
@@ -106,7 +129,7 @@ else:
         st.subheader("Transfer Money to/from accounts")
         direction = st.radio("Transfer Direction",["Bank to Investment","Investment to Bank"])
         amount = st.number_input("How much would you like to tranfer")
-        pin_input = st.number_input("Enter your PIN", min_value=1000, max_value=9999)
+        pin_input = st.number_input("Enter your PIN",min_value=0,step=1)
 
         if st.button("Tranfer Money"):
             try:
@@ -125,7 +148,7 @@ else:
         direction = st.radio("Invest Direction",["Buy stocks","Sell stocks"])
 
         if direction == "Buy stocks":
-            df =  pd.DataFrame([{"Name":s.name,"Symbol":s.symbol,"Value":s.value}for s in invest.stocks])
+            df =  pd.DataFrame([{"Name":s.name,"Symbol":s.symbol,"Value":s.value,"Volatility(%)":s.volatility}for s in invest.stocks])
             st.dataframe(df)
 
             choice = st.selectbox("Select the symbol of the stock you wish to buy",[s.symbol for s in invest.stocks])
@@ -146,6 +169,7 @@ else:
                 st.write("You have no holdings to sell.")
             else:
                 df = pd.DataFrame([{"Name":h.name,"Symbol":h.symbol,"Quantity":h.quantity,"Cost Basis":h.cost_basis}for h in invest.holdings])
+                df.set_index("Name")
                 st.dataframe(df)
 
                 choice = st.selectbox("Select the holding you wish to sell",[h.symbol for h in invest.holdings])
@@ -167,6 +191,11 @@ else:
 
     with tab3:
         st.subheader("Portfolio Analysis")
+
+        if invest.current_news:
+            st.info(f"**TRENDING NEWS:** {invest.current_news}")
+        else:
+            st.info("**TRENDING NEWS:** No news available yet. Advance time to see market news.")
 
         if(len(invest.holdings)) == 0:
             st.write("You have no holdings, buy some stock to view the market")

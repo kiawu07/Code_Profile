@@ -20,6 +20,7 @@ class Stock:
     symbol: str
     previous_val: float
     value: float
+    volatility: int
 
 @dataclass
 class Holding:
@@ -37,6 +38,15 @@ class Invest():
         self.holdings = []
         self.day = 1
         self.history = []
+        self.news = [
+            "Technology stocks gain as AI demand continues to rise.",
+            "Markets remain cautious ahead of new economic data.",
+            "Investors show increased interest in renewable energy.",
+            "Consumer spending strengthens across major markets.",
+            "Markets experience a slight downturn as investors take profits.",
+            "Major technology companies report strong quarterly results."
+            ]
+        self.current_news = None
 
         with open('data/stocks.csv', 'r') as input_file:
 
@@ -45,7 +55,7 @@ class Invest():
 
             for line in lines:
                 data = line.strip().split(',')
-                self.stocks.append(Stock(data[0], data[1], float(data[2]),float(data[2])))
+                self.stocks.append(Stock(data[0], data[1], float(data[2]),float(data[2]), int(data[3])))
 
     def transfer_to_trade(self, account, amount, PIN):
         if account.get_PIN() != PIN:
@@ -150,9 +160,10 @@ class Invest():
 
     def advance(self):
         self.day += 1
+        self.current_news = random.choice(self.news)
         for stock in self.stocks:
             stock.previous_val = stock.value 
-            percentage = random.randint(-5,5)
+            percentage = random.randint(-1*stock.volatility, stock.volatility)
             stock.value += stock.value * (percentage/100)
             if stock.value < 0:
                 stock.value = 1.0

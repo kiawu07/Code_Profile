@@ -1,11 +1,11 @@
-Name,Symbol,Value
-Apple Inc.,AAPL,215.00
-Microsoft Corporation,MSFT,505.00
-NVIDIA Corporation,NVDA,160.00
-Amazon.com Inc.,AMZN,225.00
-Alphabet Inc.,GOOGL,185.00
-Tesla Inc.,TSLA,310.00
-Meta Platforms Inc.,META,720.00
-Berkshire Hathaway Inc.,BRK.B,520.00
-JPMorgan Chase & Co.,JPM,295.00
-The Coca-Cola Company,KO,70.00
+Name,Symbol,Value,Volatility
+Apple Inc.,AAPL,215.00,3
+Microsoft Corporation,MSFT,505.00,2
+NVIDIA Corporation,NVDA,160.00,6
+Amazon.com Inc.,AMZN,225.00,4
+Alphabet Inc.,GOOGL,185.00,3
+Tesla Inc.,TSLA,310.00,7
+Meta Platforms Inc.,META,720.00,5
+Berkshire Hathaway Inc.,BRK.B,520.00,2
+JPMorgan Chase & Co.,JPM,295.00,3
+The Coca-Cola Company,KO,70.00,1

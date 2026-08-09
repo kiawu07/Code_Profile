@@ -30,11 +30,11 @@ class Account():
 
     def deposit(self, amount:float):
         self.balance += amount
-        self.statement += "You deposited " + str(amount) + " to your account"
+        self.statement += f"You deposited ${amount:.2f} to your account\n"
 
     def withdraw(self, amount:float):
         self.balance -= amount
-        self.statement += "You withdrew " + str(amount) + " from your account"
+        self.statement += f"You withdrew ${amount:.2f} from your account\n"
 
     def get_statement(self):
         return self.statement
