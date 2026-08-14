@@ -3,31 +3,25 @@ KIAGrowTM* Investment Bank Simulator
 User Report
 
 =======Personal Info==========
-Name: Al
+Name: Alwalid Kiawu
 Age: 19
-Address: St. Olaf College
-Nationality: Lib
+Address: St. Olaf
+Nationality: Liberian
 
 =======Bank Account Info========
-Account Number: 9710800
-BALANCE: 0.0
+Account Number: 9710811
+BALANCE: 1000
 STATEMENTS:
-You deposited 1000 to your account
-You withdrew 1000.0 from your account
+You deposited $1000.00 to your account
 
 
 =======Investment Account Info========
-Available to trade: 954.6161361639284
-Investment Net Worth: 1066.6311041835295
+Available to trade: 0
+Investment Net Worth: 0
 TRADE HISTORY:
-Transferred $1000.00 to trading account
-You bought 3.2258 shares of Tesla Inc. (TSLA) for $ 1000.00
-You sold 0.3500 shares of Tesla Inc. (TSLA) for $105.51
-You bought 0.5167 shares of Apple Inc. (AAPL) for $ 100.00
-You sold all of Tesla Inc. (TSLA) for $949.10
 
 
-From $1,000 initial deposit, your total net worth is: $1066.63
+From $1,000 initial deposit, your total net worth is: $1000.00
 Thanks for using KIAgrowTm* Investment Bank Simulator
 
 

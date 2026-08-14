@@ -12,10 +12,11 @@ st.set_page_config(
 
 st.title("KIAGrowTM* Investment Bank Simulator")
 
-st.expander("About this simulator", expanded=False).write(
+with st.expander("About this simulator", expanded=False):
+    st.markdown(
     """
-    Welcome to the KIAGrowTM* Investment Bank Simulator! This application allows you to simulate banking and investment activities in a risk-free environment. You can create a bank account, deposit funds, and invest in a variety of stocks. 
-
+    Welcome to the KIAGrowTM* Investment Bank Simulator! This application allows you to simulate banking and investment activities in a risk-free environment. 
+    
     **Features:**
     - Create a bank account with a unique account number.
     - Deposit and withdraw funds from your bank account.
@@ -26,14 +27,16 @@ st.expander("About this simulator", expanded=False).write(
     - Download a personalized report of your account and investment activities.
     - Grow your investment portfolio and monitor your net worth.
 
-    **Disclaimer:** This simulator is for educational purposes only and does not represent real financial advice or investment opportunities. Stocks prices and market conditions, and news are simulated and may not reflect real-world scenarios. Market movements and news are for illustrative purposes only.
+    **Disclaimer:** This simulator is for educational purposes only and does not represent real financial advice or investment opportunities. Stocks prices, market conditions, and news are simulated and may not reflect real-world scenarios. Market movements and news are for illustrative purposes only.
     Success in this simulator does not guarantee success in real-world investing. Always seek professional financial advice before making any investment decisions.
     Designed and developed by Alwalid Prince Kiawu.
     """
 )
 
-st.sidebar.image("data/logo.png",width = 700)
-
+st.sidebar.image("data/logo.png",width = 300)
+st.sidebar.divider()
+st.sidebar.caption("KIAGrowTM* Investment Bank Simulator")
+st.sidebar.caption("Educational simulation • Not financial advice")
 #check if client is not in session_state and if not, initialize them and set them to None
 if "client" not in st.session_state:
     st.session_state.client = None
@@ -73,41 +76,27 @@ else:
 
     st.subheader("📊Dashboard")
 
-    if "message" in st.session_state:
-        st.success(st.session_state.message)
-        del st.session_state.message
-
 
     st.divider()
 
-    col1,col2,col3,col4 = st.columns(4)
+
+    col1, col2 = st.columns(2)
 
     with col1:
-        st.write("**Name:**")
-        st.write("**Age:**")
-        st.write("**Nationality:**")
-
+        st.markdown("### 👤 Client Information")
+        st.write(f"**Name:**  {client.get_name()}")
+        st.write(f"**Age:**  {client.get_age()}")
+        st.write(f"**Nationality:**  {client.get_nationality()}")
+        st.write(f"**Address:**  {client.get_address()}")
 
     with col2:
-        st.write(f"{client.get_name()}")
-        st.write(f"{client.get_age()}")
-        st.write(f"{client.get_nationality()}")
-
-    with col3:
-        st.write("**Address:**")
-        st.write("**Account Number:**")
-        #writing to file , and downlaoding it
-        invest.info_file(account,client)
+        st.markdown("### 🏦 Banking Information")
+        st.write(f"**Account Number:**  {account.get_account_num()}")
         with open("data/info.txt","rb") as file:
             st.download_button(label = "Download my info",
-                                data = file,
-                                file_name = "info.txt",
-                                mime = "text/plain")
-
-    
-    with col4:
-        st.write(f"{client.get_address()}")
-        st.write(f"{account.get_account_num()}")
+                data = file,
+                file_name = "info.txt",
+                mime = "text/plain")
 
     st.divider()
 
@@ -122,8 +111,14 @@ else:
     with col7:
         st.metric("📈 Investment Net Worth", f"${invest.networth():,.2f}")
 
+        #sucess message
+    if "message" in st.session_state:
+        st.success(st.session_state.message)
+        del st.session_state.message
+
     #tabs
-    tab1, tab2, tab3 = st.tabs(["💰Transfer Money", "📈Invest in Stocks","📉Analyze Portfolio"])
+    tab1, tab2, tab3 = st.tabs(["💰Transfer Money", "📈Invest in Stocks","📊Portfolio Analytics"])
+
 
     with tab1:
         st.subheader("Transfer Money to/from accounts")
@@ -192,20 +187,23 @@ else:
     with tab3:
         st.subheader("Portfolio Analysis")
 
-        if invest.current_news:
-            st.info(f"**TRENDING NEWS:** {invest.current_news}")
-        else:
-            st.info("**TRENDING NEWS:** No news available yet. Advance time to see market news.")
+        with st.container(border = True):
+            st.markdown("### Market News")
+
+            if invest.current_news:
+                st.info(invest.current_news)
+            else:
+                st.info("No news available yet. Advance time to see market news.")
 
         if(len(invest.holdings)) == 0:
             st.write("You have no holdings, buy some stock to view the market")
 
         else:
-            st.write("**Current Prices:**")
+            st.markdown("### Current Prices")
 
-            prices = [[h.symbol, invest.get_stock_value(h.symbol), invest.get_percent_change_in_stock_val(h.symbol)]for h in invest.holdings]
+            prices = [[h.symbol, f"${invest.get_stock_value(h.symbol):,.2f}", invest.get_percent_change_in_stock_val(h.symbol)]for h in invest.holdings]
             df = pd.DataFrame(prices, columns=["Symbol","Price","Change"])
-            st.table(df)
+            st.dataframe(df)
 
             st.divider()
 
@@ -226,26 +224,34 @@ else:
             if(len(invest.history)) == 0:
                 st.write("Advance time to see stock performance")
             else:
-                st.write("**Portfolio Alocation**")
 
-                portfolio = [[h.symbol, (h.quantity * invest.get_stock_value(h.symbol))] for h in invest.holdings]
-                df = pd.DataFrame(portfolio, columns=["Stock","Value"])
+                col1,col2 = st.columns(2)
 
-                df = df.set_index("Stock")
+                with col1:
+                    st.markdown("### Portfolio Allocation")
+                    #pie chart
+                    portfolio = [[h.symbol, (h.quantity * invest.get_stock_value(h.symbol))] for h in invest.holdings]
+                    df = pd.DataFrame(portfolio, columns=["Stock","Value"])
 
-                st.pyplot(df.plot.pie(y="Value",autopct = "%1.1f%%",legend = False, radius=0.5).figure)
+                    df = df.set_index("Stock")
 
-                #pie chart
+                    st.pyplot(df.plot.pie(y="Value",autopct = "%1.1f%%",legend = False).figure)
+
+                    st.metric(
+                    "📊 Portfolio Value",
+                    f"${invest.networth():,.2f}"
+                    )
 
 
-
-                st.divider()
-
-                st.write("**Stock Performance**")
-                #line chart
-                df = pd.DataFrame(invest.history)
-                df = df.set_index("Day")
-                st.line_chart(df)
+                with col2:
+                    st.markdown("### Stock Performance")
+                    #line chart
+                    df = pd.DataFrame(invest.history)
+                    df = df.set_index("Day")
+                    st.line_chart(df)
+                    st.caption(
+                    "Market movements are simulated using stock-specific volatility."
+                    )
 
 
 

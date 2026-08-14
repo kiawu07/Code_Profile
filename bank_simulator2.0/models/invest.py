@@ -123,7 +123,7 @@ class Invest():
             raise InvalidChoiceException("Invalid stock index")
 
         if quantity == 0 or quantity <= -2:
-            raise InvalidQuantityException("Quantity must be greater than 0 or -1 to sell all")
+            raise InvalidQuantityException("Quantity must be greater than 0")
 
         if quantity > self.holdings[stock_index].quantity:
             raise InsufficientSharesException("Insufficient quantity of shares to sell")
