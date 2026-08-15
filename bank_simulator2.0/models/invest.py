@@ -172,6 +172,7 @@ class Invest():
         record = {"Day":self.day}
         for h in self.holdings:
             record[h.name] = self.get_stock_value(h.symbol)
+        record["Total Portfolio Value"] = self.networth()
         self.history.append(record)
 
     def info_file(self,account,client):

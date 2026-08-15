@@ -203,6 +203,7 @@ else:
 
             prices = [[h.symbol, f"${invest.get_stock_value(h.symbol):,.2f}", invest.get_percent_change_in_stock_val(h.symbol)]for h in invest.holdings]
             df = pd.DataFrame(prices, columns=["Symbol","Price","Change"])
+            df = df.set_index("Symbol")
             st.dataframe(df)
 
             st.divider()
