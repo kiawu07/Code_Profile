@@ -5,6 +5,7 @@ Invest Class
 
 import random
 from dataclasses import dataclass
+from pathlib import Path
 from exceptions import (
     InsufficientFundsException,
     InvalidChoiceException,
@@ -48,7 +49,10 @@ class Invest():
             ]
         self.current_news = None
 
-        with open('data/stocks.csv', 'r') as input_file:
+        BASE_DIR = Path(__file__).parent
+        stocks_path = BASE_DIR / "data" / "stocks.csv"
+
+        with open(str(stocks_path), 'r') as input_file:
 
             input_file.readline()  # Skip the header line
             lines = input_file.readlines()
@@ -177,7 +181,10 @@ class Invest():
 
     def info_file(self,account,client):
 
-        with open("data/info.txt",'w') as output_file:
+        BASE_DIR = Path(__file__).parent
+        info_path = BASE_DIR / "data" / "info.txt"
+
+        with open(str(info_path),'w') as output_file:
             output_file.write("KIAGrowTM* Investment Bank Simulator\n\n")
             output_file.write("User Report\n\n")
             output_file.write("=======Personal Info==========\n")
