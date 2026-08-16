@@ -95,7 +95,9 @@ else:
     with col2:
         st.markdown("### 🏦 Banking Information")
         st.write(f"**Account Number:**  {account.get_account_num()}")
-        with open("data/info.txt","rb") as file:
+        BASE_DIR = Path(__file__).parent.parent
+        info_path = BASE_DIR / "data" / "info.txt"
+        with open(str(info_path),"rb") as file:
             st.download_button(label = "Download my info",
                 data = file,
                 file_name = "info.txt",
