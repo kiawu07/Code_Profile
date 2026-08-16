@@ -3,6 +3,7 @@ import pandas as pd
 from models.account import Account
 from models.client import Client
 from models.invest import Invest
+from pathlib import Path
 
 st.set_page_config(
     page_title="KIAGrow Investment Simulator",
@@ -32,8 +33,10 @@ with st.expander("About this simulator", expanded=False):
     Designed and developed by Alwalid Prince Kiawu.
     """
 )
+BASE_DIR = Path(__file__).parent
+logo_path = BASE_DIR / "data" / "logo.png"
 
-st.sidebar.image("data/logo.png",width = 300)
+st.sidebar.image(str(logo_path),width = 300)
 st.sidebar.divider()
 st.sidebar.caption("KIAGrowTM* Investment Bank Simulator")
 st.sidebar.caption("Educational simulation • Not financial advice")
