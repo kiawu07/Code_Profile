@@ -203,7 +203,7 @@ class Invest():
             output_file.write("TRADE HISTORY:\n")
             output_file.write(f"{self.get_trade_history()}\n\n")
             total = self.networth() + account.get_balance()
-            output_file.write(f"From $1,000 initial deposit, your total net worth is: ${total:.2f}\n")
+            output_file.write(f"From $1,000.00 initial deposit, your total net worth is: ${total:,.2f}\n")
             output_file.write("Thanks for using KIAgrowTm* Investment Bank Simulator\n\n\n\n")
             output_file.write("Made and Designed by: Alwalid Prince Kiawu")
 
