@@ -8,7 +8,11 @@ to strengthen my software development fundamentals.
 ### [bank_simulator](./bank_simulator)
 A C++ command-line banking and investment simulator — account creation, deposits/withdrawals, 
 a simulated stock market with buy/sell functionality, custom exception handling, and unit tests.
-**Skills:** C++, OOP, exception handling, unit testing, file I/O
+**Skills:** C++, OOP, exception handling, unit testing, Make, file I/O
+
+### [bank_simulator2.0](./bank_simulator2.0)
+A Python and Streamlit GUI banking and investment simulator(An update on the previous one) - account creation, dashboard, deposits/withdrawals, a simulated volatile stock market, with buy/sell functionality, portfolio analysis graphs, tables, and charts, and output file.
+**Skills:** Python, Streamlit, Pandas, OOP, exception handling, file I/O 
 
 ### [Fitness_Tracker](./Fitness_Tracker)
 A C++ command-line fitness simulator - exercise tracking, meal recommendation, calorie counter/tracking
