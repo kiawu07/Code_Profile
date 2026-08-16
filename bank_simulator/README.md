@@ -42,12 +42,10 @@ g++ -std=c++14 main.cpp invest.cpp account.cpp client.cpp -o bank_simulator
 ├── holding.hpp # Holding struct — a user's owned shares
 ├── exceptions.hpp # custom exception types
 ├── stocks.csv # starting market data
-└── reports.txt # users' info, bank and trade histories
-└── test_invest.cpp # unit tests for the Invest class
+├── reports.txt # users' info, bank and trade histories
+├── test_invest.cpp # unit tests for the Invest class
 
 ## Design Decisions
-
-A few things worth calling out, since they weren't obvious on the first pass:
 
 - **Holdings track cost basis separately from current market value.** A `Holding` stores what 
   the user *paid* and how many shares they own; current worth is always recalculated live against 
