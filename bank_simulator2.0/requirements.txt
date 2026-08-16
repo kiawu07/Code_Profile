@@ -1,5 +1,3 @@
-Requirements for bank_simulator2.0
-
 streamlit
 pandas
 matplotlib
