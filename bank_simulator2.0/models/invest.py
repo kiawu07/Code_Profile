@@ -49,7 +49,7 @@ class Invest():
             ]
         self.current_news = None
 
-        BASE_DIR = Path(__file__).parent
+        BASE_DIR = Path(__file__).parent.parent
         stocks_path = BASE_DIR / "data" / "stocks.csv"
 
         with open(str(stocks_path), 'r') as input_file:
@@ -181,7 +181,7 @@ class Invest():
 
     def info_file(self,account,client):
 
-        BASE_DIR = Path(__file__).parent
+        BASE_DIR = Path(__file__).parent.parent
         info_path = BASE_DIR / "data" / "info.txt"
 
         with open(str(info_path),'w') as output_file:
